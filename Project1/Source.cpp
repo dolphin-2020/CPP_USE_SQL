@@ -3,7 +3,6 @@
 #include<sstream>
 #include<fstream>
 #include<ctime>
-#include<vector>
 #include "AddSql.hpp"
 using namespace std;
 
@@ -13,7 +12,7 @@ int main()
     sql.initSql();
     sql.connSql();
 
-    ifstream ifs("C:/download/GBPJPY.csv");
+    ifstream ifs("H:/Forex/AUDCAD.csv");
     long timeBegin = 0;
     long timeEnd = 0;
 
@@ -24,10 +23,11 @@ int main()
         timeBegin = clock();
         if (ifs.good())
             ifs.getline(bf, 200);
-        long i = 0;
+        int i = 0;
+        int j = 0;
         stringstream ss;
         string tsp;
-        ss << "INSERT INTO GBPJPY(Timestamp,Bid,Ask)VALUES\n";
+        ss << "INSERT INTO AUDCAD(Timestamp,Bid,Ask)VALUES\n";
         while (ifs.good())
         {
             ifs.getline(bf, 200);
@@ -42,22 +42,29 @@ int main()
             ss << tsp << ")," << endl;
 
             ++i;
-            if (i % 100000 == 0)
+            if (1000==i)
             {
                 int len = ss.str().length();
-                tsp = ss.str().substr(0, len - 2);
+                tsp = ss.str().substr(0, len - 2) + ';';
                 sql.executQuery(tsp);
+                //cout << tsp << endl;
+                j++;
+                i = 0;
                 ss.str("");
-                ss << "INSERT INTO GBPJPY(Timestamp,Bid,Ask)VALUES\n";
-                system("pause");
+                ss << "INSERT INTO AUDCAD(Timestamp,Bid,Ask)VALUES\n";
+                //system("pause");
             }
         }
-        int len = ss.str().length();
-        tsp = ss.str().substr(0, len - 2);
-        sql.executQuery(tsp);
-        ss.str("");
-
+        if (ss.good())
+        {
+            int len = ss.str().length();
+            tsp = ss.str().substr(0, len - 2)+';';
+            sql.executQuery(tsp);
+            ss.str("");
+        }
+        
         timeEnd = clock();
+        cout << j << endl;
     }
     cout << "Total time is:" << timeEnd - timeBegin << endl;
     ifs.close();

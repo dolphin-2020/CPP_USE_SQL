@@ -28,7 +28,7 @@ void AddSql::executQuery(const string& query)
     wstring stemp = wstring(query.begin(), query.end());
     LPCWSTR sw = stemp.c_str();
 
-    cout << "\nExecuting T-SQL query...\n";
+    //cout << "\nExecuting T-SQL query...\n";
     if (SQL_SUCCESS != SQLExecDirect(sqlStmtHandle, (SQLWCHAR*)sw, SQL_NTS))//L"SELECT * from [user]"
     {
         cout << "Error querying SQL Server\n";
@@ -36,7 +36,7 @@ void AddSql::executQuery(const string& query)
     }
     else
     {
-        cout << "Insert success" << endl;
+        //cout << "Insert success" << endl;
         //leave(sqlConnHandle, sqlStmtHandle, sqlEnvHandle);
         //SQLCHAR sqlVersion[256];
         //SQLINTEGER ptrSqlVersion;
