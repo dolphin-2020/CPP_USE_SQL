@@ -1,4 +1,4 @@
-
+#pragma once
 #include <windows.h>
 #include <sqlext.h>
 #include <sqltypes.h>
@@ -12,7 +12,6 @@ private:
     SQLHANDLE sqlStmtHandle;
     SQLHANDLE sqlEnvHandle;
     SQLWCHAR retconstring[2048];
-    void leave(SQLHANDLE sqlConnHandle, SQLHANDLE sqlStmtHandle, SQLHANDLE sqlEnvHandle);
 
 public:
     AddSql();
@@ -20,8 +19,8 @@ public:
     void initSql();
     void connSql();
     void executQuery(const string& query);
+    void leave(SQLHANDLE sqlConnHandle, SQLHANDLE sqlStmtHandle, SQLHANDLE sqlEnvHandle);
 };
-
 
 void AddSql::executQuery(const string& query)
 {

@@ -23,5 +23,8 @@
     <ClInclude Include="AddSql.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OperateSqls.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
